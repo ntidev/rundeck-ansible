@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+    rundeck:
+        image: ntidev/rundeck-ansible:${IMAGE_TAG}
+        tty: true
+        env_file:
+          - ./.env
+        volumes:
+          - data:/home/rundeck/server/data
+          - /root/.ssh:/root/.ssh
+          - ./ansible:/home/rundeck/ansible
+        ports:
+          - ${RUNDECK_PORT}:4440
+
+volumes:
+    data:
